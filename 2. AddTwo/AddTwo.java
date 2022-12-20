@@ -19,39 +19,14 @@ public class AddTwo {
         
         while (true)
         {
-            try
-            {
-                left = l1.val;
-            } catch (NullPointerException npe)
-            {
-                left = 0;
-            }
-            try
-            {
-                right = l2.val;
-            } catch (NullPointerException npe)
-            {
-                right = 0;
-            }
+            left = (l1 != null) ? l1.val : 0;
+            right = (l2 != null) ? l2.val : 0;
 
             ln.val = (left + right + carry) % 10;                
 
             carry = ((left + right + carry) > 9) ? 1 : 0;
-
-            try 
-            {
-                l1 = l1.next;
-            } catch (NullPointerException npe)
-            {
-                l1 = null;
-            }
-            try 
-            {
-                l2 = l2.next;
-            } catch (NullPointerException npe)
-            {
-                l2 = null;
-            }
+            l1 = (l1 == null) ? null : l1.next;
+            l2 = (l2 == null) ? null : l2.next;
 
             if (l1 == null && l2 == null && carry == 0) break;
             ln.next = new ListNode();
