@@ -4,50 +4,61 @@ import java.util.HashMap;
 public class LongestSubstring {
     public int lengthOfLongestSubstring(String s) 
     {
-        // Key is substring, Integer is start index
-        HashMap <CharSequence, Integer> chars = new HashMap<CharSequence, Integer>();
-        int i = 0; int j = 1;
-        int max = 0;
-        StringBuilder sb = new StringBuilder(s);
-        CharSequence subSeq;
+        
+        if (s.length() == 0) return 0;
+        if (s.length() == 1) return 1;
 
-        while ((s.length() - i) > max)
+        // HashMap with key as letter, value as i-th iteration.
+        // This should keep track of seeing a repeat letter in a substring.
+        HashMap <Character, Integer> hm = new HashMap<Character, Integer>();
+        int max = 1; int val; char thisChar;
+        int i = 0; int j = i + 1;
+
+        while ((i < s.length()) && (s.length() - i) > max)
         {
-            j = (i + 1) % (s.length() + 1);
-            subSeq = sb.subSequence(i, j);
+            // Add the letter at i to the hashmap.
+            hm.put(s.charAt(i), i);
 
-            // If the key is not in the hashmap or the key IS in the hash map but the index is different (so continue checking this substring)
-            // So if we get the default value (-1), the index isn't the same.
-            // Store the new key, new index, and adjust max if necessary.
-            // Also checking if the character at the end of the new sequence 
-            while (!(chars.containsKey(subSeq)) || (chars.getOrDefault(subSeq, -1) == -1))
+            j = i + 1;
+
+            while (j < s.length())
             {
-                int charPos = (subSeq.length() == 1) ? 0: subSeq.length() - 1;
-                if (chars.containsKey(Character.toString(subSeq.charAt(charPos)))) break;
+                // Get the current letter's value to see if we have seen it this loop.
+                thisChar = s.charAt(j);
+                val = hm.getOrDefault(thisChar, -1);
 
-                chars.put(subSeq, i);
-                chars.put(Character.toString(subSeq.charAt(charPos)), Integer.valueOf(subSeq.charAt(charPos)));
+                // If we get -1, haven't seen char yet so add key:value pair to hashmap.
+                if (val == -1) hm.put(thisChar, i);
 
-                if (subSeq.length() > max) 
+                // Check if letter at j has been seen before this substring.
+                // This can be done by seeing if that letter (key) has current j as its value.
+                else if (val == i)
                 {
-                    max = subSeq.length();
+                    // Since we found a letter that has been previously seen this iteration, move i to the spot we saw it last so it will iterate one ahead next time around.
+                    i = hm.get(s.charAt(j));
+
+                    // We can break here since the max will not have increased.
+                    break;
                 }
 
-                if (j >= s.length()) break;
-                else j++;
+                // If we get another value besides current iteration or -1, the value has been seen in another iteration so update to this one.
+                else 
+                {
+                    hm.put(thisChar, i);
+                }
 
-                subSeq = sb.subSequence(i, j);
+                max = ((j - i + 1) > max) ? (j - i + 1): max;
+                j++;
             }
-
             i++;
-            chars.clear();   
         }
+        
         return max;
     }
     public static void main (String [] args)
     {
         LongestSubstring ll = new LongestSubstring();
-        System.out.println(" ".length());
-        System.out.println(ll.lengthOfLongestSubstring(" "));
+        // System.out.println(" ".length());
+        System.out.println(ll.lengthOfLongestSubstring("pwwkew"));
     }
 }
