@@ -15,10 +15,16 @@ numRows = 4
 0 6 12 1 5 7 11 13 2 4 8 10 3 9
 
 
+numRows = 3
+
+P
+A P
+Y
+
+
 Initial thoughts:
 
-- numRows lists
-- cycle through given string (0, length]
-    - mod position of iterator by numRows
-    - (slow) have numRows lists, append to corresponding list as you iterate through the string
-    - after loop, concatenate lists and .join() into string
+- the array that the letter from s goes in is dependent on counter (which dict array to be added to)
+- the letter being added is always the same, only the array it gets added to changes
+- counter reaches numRows - 1 after mod, so now it decrements instead of increments until hitting 0
+- once hitting 0, increments again. repeat

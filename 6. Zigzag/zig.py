@@ -1,12 +1,31 @@
 def convert (s, numRows):
+    if (len(s) < 3):
+        return s
     Dictionary = {}
+    counter = 0
+    j = 0
+    reverse = False
 
     for i in range(numRows):
         Dictionary[i] = []
 
-    for i in range(len(s)):
-        arr = i % (numRows)
-        Dictionary[arr].append(s[i])
+    while (j < len(s)):
+        if (counter % numRows) == numRows - 1:
+            reverse = True
+        elif counter == 0:
+            reverse = False
+        
+        if reverse:
+            Dictionary[counter].append(s[j])
+            counter -= 1
+        else:
+            Dictionary[counter].append(s[j])
+            counter += 1
+
+        j += 1
+        
+
+
     finalList = []
     for i in range(numRows):
         finalList += Dictionary[i]
@@ -14,4 +33,4 @@ def convert (s, numRows):
     return "".join(finalList)
 
 if __name__ == "__main__":
-    print(convert("PAYPALISHIRING", 3))
+    print(convert("AB", 1))
