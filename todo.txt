@@ -1,1 +1,24 @@
-3. Re-implement a little later down the road. Lots of edge cases needed to be solved before failing them.
+6. 
+p a y p a l i s h i r  i  n  g
+0 1 2 3 4 5 6 7 8 9 10 11 12 13
+
+numRows = 3
+
+0 4 8 12 1 3 5 7 9 11 13 2 6 10
+
+
+p a y p a l i s h i r  i  n  g
+0 1 2 3 4 5 6 7 8 9 10 11 12 13
+
+numRows = 4
+
+0 6 12 1 5 7 11 13 2 4 8 10 3 9
+
+
+Initial thoughts:
+
+- numRows lists
+- cycle through given string (0, length]
+    - mod position of iterator by numRows
+    - (slow) have numRows lists, append to corresponding list as you iterate through the string
+    - after loop, concatenate lists and .join() into string
