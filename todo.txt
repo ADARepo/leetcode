@@ -1,30 +1,11 @@
-6. 
-p a y p a l i s h i r  i  n  g
-0 1 2 3 4 5 6 7 8 9 10 11 12 13
+7.
 
-numRows = 3
+- mod by 10, then 100, then 1000...
 
-0 4 8 12 1 3 5 7 9 11 13 2 6 10
+123
 
+ret = (ret * 10) + rem
 
-p a y p a l i s h i r  i  n  g
-0 1 2 3 4 5 6 7 8 9 10 11 12 13
-
-numRows = 4
-
-0 6 12 1 5 7 11 13 2 4 8 10 3 9
-
-
-numRows = 3
-
-P
-A P
-Y
-
-
-Initial thoughts:
-
-- the array that the letter from s goes in is dependent on counter (which dict array to be added to)
-- the letter being added is always the same, only the array it gets added to changes
-- counter reaches numRows - 1 after mod, so now it decrements instead of increments until hitting 0
-- once hitting 0, increments again. repeat
+(0 * 10) + 3 = 3
+(3 * 10) + 2 = 32
+32 * 10 + 1 = 321
