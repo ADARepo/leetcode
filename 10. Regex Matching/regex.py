@@ -1,12 +1,18 @@
+# https://www.youtube.com/watch?v=HAA8mgxlov8
 class Solution:
 
     def __init__(self):
         return None
 
-# https://www.youtube.com/watch?v=HAA8mgxlov8
     def isMatch(self, s: str, p: str):
     
+        cache = {}
+
         def recursiveDepth(i, j):
+
+            if (i, j) in cache:
+                return cache[(i, j)]
+
             if i >= len(s) and j >= len(p):
                 return True
             if j >= len(p):
@@ -15,9 +21,13 @@ class Solution:
             match = i < len(s) and (s[i] == p[j] or p[j] == '.')
             if (j + 1) < len(p) and (p[j + 1] == '*'):
                 # Skip the two chars since the char isn't in s OR keep checking since char matches regex in p.
-                return (recursiveDepth(i, j + 2) or (match and recursiveDepth(i + 1, j)))
+                cache[(i, j)] = (recursiveDepth(i, j + 2) or (match and recursiveDepth(i + 1, j)))
+
+                return cache[(i, j)]
             if match:
-                return recursiveDepth(i + 1, j + 1)
+                cache [(i, j)] = recursiveDepth(i + 1, j + 1)
+                return cache [(i, j)]
+            cache[(i, j)] = False
             
             return False
         
