@@ -1,8 +1,8 @@
 # https://www.youtube.com/watch?v=HAA8mgxlov8
 class Solution:
 
-    def __init__(self):
-        return None
+    # def __init__(self):
+    #     return None
 
     def isMatch(self, s: str, p: str):
     

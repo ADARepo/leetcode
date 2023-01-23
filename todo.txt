@@ -1,12 +1,8 @@
-loop that goes until two pointers are >= their respective lengths in regex or string
+Brute Force:
 
-take a pointer in the regex and another in the string
-look at regex pointer, decide if string pointer character fits criteria and if not, return false
-if (lowercase letter or '.') and '*' is at the index in string: perform a while loop of the character until end of string or character isnt the same
-	- since '*' can be 0 characters of the preceding one, make sure that the loop cancels immediately if the character doesnt fit
-(else ?)if lowercase letter and '*' is NOT at the index after, do a 1-1 comparison and increment both pointers
+min of array[i] and array[j] for height
+j - i for width
 
+height * width for output
 
-letter or period without *
-letter with *
-period with *
+store max
