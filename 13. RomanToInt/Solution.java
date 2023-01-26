@@ -3,87 +3,23 @@ public class Solution
 
     public int romanToInt (String s)
     {
-        if (s.length() == 1) 
-        {
-            if (s.charAt(0) == 'I') return 1;
-            if (s.charAt(0) == 'V') return 5;
-            if (s.charAt(0) == 'X') return 10;
-            if (s.charAt(0) == 'L') return 50;
-            if (s.charAt(0) == 'C') return 100;
-            if (s.charAt(0) == 'D') return 500;
-            else return 1000;
-        }
+        int ret = 0, lastChar = 0, n;
 
-        int ret = 0;
-        int i = 0;
-
-        while (i < (s.length()))
+        for (int i = (s.length() - 1); i >= 0; i--)
         {
-            while (i < s.length() && s.charAt(i) == 'M')
-            {
-                ret += 1000;
-                i++;
-            }
-            if (i < (s.length() - 1) && s.charAt(i) == 'C' && s.charAt(i+1) == 'M')
-            {
-                ret += 900;
-                i += 2;
-            }
-            else if (i < (s.length() - 1) && s.charAt(i) == 'C' && s.charAt(i+1) == 'D')
-            {
-                ret += 400;
-                i += 2;
-            }
-            else if (i < s.length() && s.charAt(i) == 'C')
-            {
-                ret += 100;
-                i++;
-            }
-            else if (i < (s.length() - 1) && s.charAt(i) == 'X' && s.charAt(i+1) == 'C')
-            {
-                ret += 90;
-                i += 2;
-            }
-            else if (i < (s.length() - 1) && s.charAt(i) == 'X' && s.charAt(i+1) == 'L')
-            {
-                ret += 40;
-                i += 2;
-            }
-            else if (i < s.length() && s.charAt(i) == 'X')
-            {
-                ret += 10;
-                i++;
-            }
-            else if (i < (s.length() - 1) && s.charAt(i) == 'I' && s.charAt(i+1) == 'X')
-            {
-                ret += 9;
-                i += 2;
-            }
-            else if (i < (s.length() - 1) && s.charAt(i) == 'I' && s.charAt(i+1) == 'V')
-            {
-                ret += 4;
-                i += 2;
-            }
-            else if (i < (s.length()) && s.charAt(i) == 'L')
-            {
-                ret += 50;
-                i++;
-            }
-            else if (i < (s.length()) && s.charAt(i) == 'V')
-            {
-                ret += 5;
-                i++;
-            }
-            else if (i < (s.length()) && s.charAt(i) == 'D')
-            {
-                ret += 500;
-                i++;
-            }
-            else if (i < (s.length()))
-            {
-                ret++;
-                i += 1;
-            }
+            char c = s.charAt(i);
+            if (c == 'I') n = 1;
+            else if (c == 'V') n = 5;
+            else if (c == 'X') n = 10;
+            else if (c == 'L') n = 50;
+            else if (c == 'C') n = 100;
+            else if (c == 'D') n = 500;
+            else n = 1000;
+
+            if (n < lastChar) ret -= n;
+            else ret += n;
+
+            lastChar = n;
         }
 
         return ret;
