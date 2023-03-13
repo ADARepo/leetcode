@@ -57,20 +57,25 @@ public class FourSome
 
         // Final return list is ret, indexRet will hold indices at first then convert to ret values later.
         List <List<Integer>> ret = new ArrayList<List<Integer>>();
-        
+
         
         for (int i = 0; i < len - 3; i++)
         {
             for (int j = i+1; j < len - 2; j++)
             {
+                // Half now equals the remaining sum we need after values at i and j are subtracted.
+                long half = target - (long)nums[i] - nums[j];
                 int low = j + 1;
                 int high = len - 1;
+                if (half + nums[low] + nums[high] > Integer.MAX_VALUE) continue;
 
                 while (low < high)
                 {
-                    long sum = (long)nums[i] + nums[j] + nums[low] + nums[high];
-
-                    if (sum == target)
+                    int remainingSum = nums[low] + nums[high];
+                    
+                    if (remainingSum < half) low++;
+                    else if (remainingSum > half) high--;
+                    else
                     {
                         List <Integer> temp = new ArrayList<Integer>();
                         temp.add(nums[i]);
@@ -80,11 +85,13 @@ public class FourSome
                         Collections.sort(temp);
                         if (!ret.contains(temp)) ret.add(temp);
                         low++;
+                        
+                        // Skip duplicates.
+                        while (low < high && nums[low] == temp.get(2)) low++;
+                        while (low < high && nums[high] == temp.get(3)) high--;
                     }
-
-                    if (sum < target) low++;
-                    else if (sum > target) high--;
                 }
+
             }
         }
         return ret;
@@ -94,8 +101,8 @@ public class FourSome
     {
         FourSome obj = new FourSome();
 
-        int [] nums = new int[]{1000000000,1000000000,1000000000,1000000000};
+        int [] nums = new int[]{1,0,-1,0,-2,2};
 
-        System.out.println(obj.fourSum(nums, -294967296));
+        System.out.println(obj.fourSum(nums, 0));
     }
 }
