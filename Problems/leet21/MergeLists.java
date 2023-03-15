@@ -11,7 +11,6 @@ public class MergeLists
         ListNode retSort = sorted;
 
         ListNode head1 = list1, head2 = list2;
-        int prev1 = -101, prev2 = -101;
 
         while ((head1 != null) && (head2 != null))
         {
