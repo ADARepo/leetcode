@@ -15,7 +15,7 @@ public class MergeK
         int j = 0;
 
         while (j < lists.length && lists[j] == null) j++;
-        if (lists[j] == null) return null;
+        if (j >= lists.length) return null;
         ret = lists[j];
 
         for (int i=0; (i < lists.length); i++)
